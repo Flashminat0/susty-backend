@@ -1,11 +1,10 @@
-const db = require('../config/db.config');
-const {Orders} = db;
-
+const db = require('../config/db.config')
+const { Orders } = db
 
 export const paypalBuy = async (req, res) => {
-    const {userId, product, paypal} = req.body;
+    const { userId, product, paypal } = req.body
 
-    console.log(paypal);
+    console.log(paypal)
 
     await Orders.create({
         order_desc: product.long_description,
@@ -19,24 +18,24 @@ export const paypalBuy = async (req, res) => {
         buyerId: userId,
         purchaseDate: new Date(),
         // paypal: paypal
-    }).then(() => {
-        res.status(200).json({
-            message: 'Order created successfully'
-        });
-    }).catch(err => {
-        res.status(500).json({
-            message: 'Error occured',
-            error: err
-        });
-    });
+    })
+        .then(() => {
+            res.status(200).json({
+                message: 'Order created successfully',
+            })
+        })
+        .catch((err) => {
+            res.status(500).json({
+                message: 'Error occured',
+                error: err,
+            })
+        })
 
-    console.log(req.body);
-
+    console.log(req.body)
 }
 
 export const paypalBuyFail = async (req, res) => {
-    const {userId, product, paypal} = req.body;
-
+    const { userId, product, paypal } = req.body
 
     await Orders.create({
         order_desc: product.long_description,
@@ -50,26 +49,24 @@ export const paypalBuyFail = async (req, res) => {
         buyerId: userId,
         purchaseDate: new Date(),
         // paypal: paypal
-    }).then(() => {
-        res.status(200).json({
-            message: 'Order created successfully'
-        });
-    }).catch(err => {
-        res.status(500).json({
-            message: 'Error occured',
-            error: err
-        });
-    });
+    })
+        .then(() => {
+            res.status(200).json({
+                message: 'Order created successfully',
+            })
+        })
+        .catch((err) => {
+            res.status(500).json({
+                message: 'Error occured',
+                error: err,
+            })
+        })
 
-
-    console.log(req.body);
-
+    console.log(req.body)
 }
 
-
 export const paypalBuyError = async (req, res) => {
-    const {userId, product,} = req.body;
-
+    const { userId, product } = req.body
 
     await Orders.create({
         order_desc: product.long_description,
@@ -83,17 +80,18 @@ export const paypalBuyError = async (req, res) => {
         buyerId: userId,
         purchaseDate: new Date(),
         // paypal: paypal
-    }).then(() => {
-        res.status(200).json({
-            message: 'Order created successfully'
-        });
-    }).catch(err => {
-        res.status(500).json({
-            message: 'Error occured',
-            error: err
-        });
-    });
+    })
+        .then(() => {
+            res.status(200).json({
+                message: 'Order created successfully',
+            })
+        })
+        .catch((err) => {
+            res.status(500).json({
+                message: 'Error occured',
+                error: err,
+            })
+        })
 
-    console.log(req.body);
-
+    console.log(req.body)
 }

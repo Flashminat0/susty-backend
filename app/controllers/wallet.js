@@ -1,9 +1,9 @@
-import db from '../config/db.config';
+import db from '../config/db.config'
 
-const {Wallet} = db;
+const { Wallet } = db
 
 export const fetchWallet = (req, res) => {
-    const {userId} = req.body;
+    const { userId } = req.body
 
     Wallet.findOne({
         where: {
@@ -14,7 +14,6 @@ export const fetchWallet = (req, res) => {
             success: true,
             message: 'Wallet found',
             walletDetails,
-        });
+        })
     })
-
 }

@@ -1,14 +1,11 @@
-import express from "express";
+import express from 'express'
 
-const router = express.Router();
+const router = express.Router()
 
-import {getAllProducts, getProductById} from "../controllers/products";
-
+import { getAllProducts, getProductById } from '../controllers/products'
 
 // dashboard
-router.get("/guest/get-all-products", getAllProducts);
-router.get("/guest/get-product-by-id", getProductById);
+router.get('/guest/get-all-products', getAllProducts)
+router.get('/guest/get-product-by-id', getProductById)
 
-
-
-module.exports = router;
+module.exports = router
