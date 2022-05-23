@@ -1,12 +1,12 @@
-import { Op } from 'sequelize'
+import {Op} from 'sequelize'
 
 const db = require('../config/db.config')
-const { Product } = db
+const {Product} = db
 
 const aws = require('aws-sdk')
 const multer = require('multer')
 const multerS3 = require('multer-s3')
-const { customAlphabet } = require('nanoid')
+const {customAlphabet} = require('nanoid')
 
 require('dotenv').config()
 
@@ -33,7 +33,7 @@ export const getAllProducts = (req, res) => {
 
 //for params url (products/view/:id)
 export const getProductById = (req, res) => {
-    let { productId } = req.query
+    let {productId} = req.query
 
     Product.findOne({
         where: {
@@ -63,27 +63,25 @@ export const productPagination = (req, res) => {
 
         const offset = page ? page * limit : 0
 
-        Product.findAndCountAll({ limit: limit, offset: offset }).then(
-            (data) => {
-                const totalPages = Math.ceil(data.count / limit)
-                const response = {
-                    message:
-                        'Paginating is completed! Query parameters: page = ' +
-                        page +
-                        ', limit = ' +
-                        limit,
-                    data: {
-                        totalItems: data.count,
-                        totalPages: totalPages,
-                        limit: limit,
-                        currentPageNumber: page + 1,
-                        currentPageSize: data.rows.length,
-                        products: data.rows,
-                    },
-                }
-                res.send(response)
+        Product.findAndCountAll({limit: limit, offset: offset}).then((data) => {
+            const totalPages = Math.ceil(data.count / limit)
+            const response = {
+                message:
+                    'Paginating is completed! Query parameters: page = ' +
+                    page +
+                    ', limit = ' +
+                    limit,
+                data: {
+                    totalItems: data.count,
+                    totalPages: totalPages,
+                    limit: limit,
+                    currentPageNumber: page + 1,
+                    currentPageSize: data.rows.length,
+                    products: data.rows,
+                },
             }
-        )
+            res.send(response)
+        })
     } catch (error) {
         res.status(500).send({
             message: 'Error -> Can NOT complete a paging request!',
@@ -93,7 +91,7 @@ export const productPagination = (req, res) => {
 }
 
 export const addProduct = (req, res) => {
-    let { userId } = req.body
+    let {userId} = req.body
 
     console.log(req.body.purchaseTags)
 
@@ -148,7 +146,7 @@ export const addProduct = (req, res) => {
 }
 
 export const updateProduct = async (req, res) => {
-    let { userId } = req.body
+    let {userId} = req.body
 
     try {
         let product = {
@@ -178,7 +176,7 @@ export const updateProduct = async (req, res) => {
 }
 
 export const deleteProduct = async (req, res) => {
-    let { userId, productId } = req.body
+    let {userId, productId} = req.body
 
     try {
         let product = await Product.findOne({
@@ -215,7 +213,7 @@ export const deleteProduct = async (req, res) => {
 
 export const fetchSellerProductList = (req, res) => {
     try {
-        let { userId } = req.body
+        let {userId} = req.body
         Product.findAll({
             where: {
                 sellerId: userId,
@@ -252,7 +250,7 @@ const s3 = new aws.S3({
 })
 
 export const addImage = (req, res) => {
-    const { file } = req.file
+    const {file} = req.file
 
     const upload = multer({
         storage: multerS3({
@@ -284,7 +282,7 @@ export const addImage = (req, res) => {
 }
 
 export const publishProduct = (req, res) => {
-    const { productId, userId } = req.body
+    const {productId, userId} = req.body
 
     Product.update(
         {
@@ -315,7 +313,7 @@ export const publishProduct = (req, res) => {
 }
 
 export const unpublishProduct = (req, res) => {
-    const { productId, userId } = req.body
+    const {productId, userId} = req.body
 
     Product.update(
         {

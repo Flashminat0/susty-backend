@@ -1,5 +1,5 @@
 import express from 'express'
-import { authenticateToken, validateToken } from '../middlewares/user'
+import {authenticateToken, validateToken} from '../middlewares/user'
 
 import {
     filterOrders,

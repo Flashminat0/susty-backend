@@ -10,7 +10,7 @@ import {
     getBankInfo,
     changeBankInfo,
 } from '../controllers/seller'
-import { validateToken } from '../middlewares/user'
+import {validateToken} from '../middlewares/user'
 
 const router = express.Router()
 

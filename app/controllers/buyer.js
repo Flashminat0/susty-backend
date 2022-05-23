@@ -1,8 +1,8 @@
 const db = require('../config/db.config')
-const { Orders } = db
+const {Orders} = db
 
 export const fetchOrdersByCustomer = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     Orders.findAll({
         where: {
@@ -24,7 +24,7 @@ export const fetchOrdersByCustomer = (req, res) => {
 }
 
 export const SearchOrder = (req, res) => {
-    const { userId, orderId } = req.body
+    const {userId, orderId} = req.body
 
     Orders.findOne({
         where: {

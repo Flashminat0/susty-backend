@@ -1,6 +1,6 @@
 import express from 'express'
-import { getSellerCustomers, filterCustomers } from '../controllers/customers'
-import { validateToken } from '../middlewares/user'
+import {getSellerCustomers, filterCustomers} from '../controllers/customers'
+import {validateToken} from '../middlewares/user'
 
 const router = express.Router()
 

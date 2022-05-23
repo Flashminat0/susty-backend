@@ -1,11 +1,11 @@
-import { Op } from 'sequelize'
+import {Op} from 'sequelize'
 import moment from 'moment'
 
 const db = require('../config/db.config')
-const { Customer } = db
+const {Customer} = db
 
 export const getSellerCustomers = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     Customer.findAll({
         where: {
@@ -23,7 +23,7 @@ export const getSellerCustomers = (req, res) => {
 }
 
 export const filterCustomers = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
     const filters = req.query
 
     if (filters.startDate || filters.endDate) {

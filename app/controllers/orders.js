@@ -1,11 +1,11 @@
 import moment from 'moment'
 
 const db = require('../config/db.config')
-const { Op } = require('sequelize')
-const { Orders } = db
+const {Op} = require('sequelize')
+const {Orders} = db
 
 export const listOrders = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     Orders.findAll({
         where: {
@@ -21,7 +21,7 @@ export const listOrders = (req, res) => {
 }
 
 export const listCustomerOrders = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     Orders.findAll({
         where: {
@@ -38,7 +38,7 @@ export const listCustomerOrders = (req, res) => {
 }
 
 export const searchOrder = (req, res) => {
-    const { sellerId, orderId } = req.body
+    const {sellerId, orderId} = req.body
 
     Orders.findAll({
         where: {
@@ -55,7 +55,7 @@ export const searchOrder = (req, res) => {
 }
 
 export const viewOrder = (req, res) => {
-    const { orderId } = req.body
+    const {orderId} = req.body
 
     Orders.findOne({
         where: {
@@ -71,7 +71,7 @@ export const viewOrder = (req, res) => {
 }
 
 export const filterOrders = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
     const filters = req.query
 
     if (filters.startDate || filters.endDate) {
@@ -128,7 +128,7 @@ export const filterOrders = (req, res) => {
 }
 
 export const filterOrdersCustomer = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
     const filters = req.query
 
     delete filters.page
@@ -202,7 +202,7 @@ export const filterOrdersCustomer = (req, res) => {
 }
 
 export const cancelPendingOrderBySeller = (req, res) => {
-    const { userId, orderId } = req.body
+    const {userId, orderId} = req.body
 
     Orders.update(
         {
@@ -235,7 +235,7 @@ export const cancelPendingOrderBySeller = (req, res) => {
 }
 
 export const cancelOnProcessOrderBySeller = (req, res) => {
-    const { userId, orderId } = req.body
+    const {userId, orderId} = req.body
 
     Orders.update(
         {

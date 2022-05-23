@@ -1,8 +1,8 @@
 const db = require('../config/db.config')
-const { Orders } = db
+const {Orders} = db
 
 export const paypalBuy = async (req, res) => {
-    const { userId, product, paypal } = req.body
+    const {userId, product, paypal} = req.body
 
     console.log(paypal)
 
@@ -35,7 +35,7 @@ export const paypalBuy = async (req, res) => {
 }
 
 export const paypalBuyFail = async (req, res) => {
-    const { userId, product, paypal } = req.body
+    const {userId, product, paypal} = req.body
 
     await Orders.create({
         order_desc: product.long_description,
@@ -66,7 +66,7 @@ export const paypalBuyFail = async (req, res) => {
 }
 
 export const paypalBuyError = async (req, res) => {
-    const { userId, product } = req.body
+    const {userId, product} = req.body
 
     await Orders.create({
         order_desc: product.long_description,

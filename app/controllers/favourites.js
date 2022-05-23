@@ -1,11 +1,11 @@
-import { customAlphabet } from 'nanoid'
+import {customAlphabet} from 'nanoid'
 
 const db = require('../config/db.config')
-const { Favourites } = db
+const {Favourites} = db
 
 // Favourites
 export const getAllFavourites = (req, res) => {
-    let { userId } = req.body
+    let {userId} = req.body
 
     Favourites.findAll({
         where: {
@@ -24,7 +24,7 @@ export const getAllFavourites = (req, res) => {
 }
 
 export const addFavourite = (req, res) => {
-    let { userId, productId } = req.body
+    let {userId, productId} = req.body
 
     Favourites.create({
         favouriteId: customAlphabet('0123456789', 10)(),
@@ -43,7 +43,7 @@ export const addFavourite = (req, res) => {
 }
 
 export const removeFavourite = (req, res) => {
-    let { userId, favouriteId } = req.body
+    let {userId, favouriteId} = req.body
 
     Favourites.delete({
         where: {

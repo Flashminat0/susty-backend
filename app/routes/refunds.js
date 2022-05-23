@@ -8,7 +8,7 @@ import {
     filterRefunds,
     filterRefundsOnCustomer,
 } from '../controllers/refunds'
-import { validateToken } from '../middlewares/user'
+import {validateToken} from '../middlewares/user'
 
 const router = express.Router()
 

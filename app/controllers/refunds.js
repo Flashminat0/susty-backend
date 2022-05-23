@@ -1,11 +1,11 @@
 import db from '../config/db.config'
-import { Op } from 'sequelize'
+import {Op} from 'sequelize'
 import moment from 'moment'
 
-const { Refunds, Product, User } = db
+const {Refunds, Product, User} = db
 
 export const listRefunds = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     Refunds.findAll({
         where: {
@@ -22,7 +22,7 @@ export const listRefunds = (req, res) => {
 }
 
 export const searchRefund = (req, res) => {
-    const { sellerId, orderId } = req.body
+    const {sellerId, orderId} = req.body
 
     Refunds.findOne({
         where: {
@@ -38,7 +38,7 @@ export const searchRefund = (req, res) => {
         })
 }
 export const acceptRefund = (req, res) => {
-    const { userId, refundId } = req.body
+    const {userId, refundId} = req.body
 
     Refunds.update(
         {
@@ -66,7 +66,7 @@ export const acceptRefund = (req, res) => {
 }
 
 export const declineRefund = (req, res) => {
-    const { userId, refundId } = req.body
+    const {userId, refundId} = req.body
 
     Refunds.update(
         {
@@ -94,7 +94,7 @@ export const declineRefund = (req, res) => {
 }
 
 export const viewRefundDetails = (req, res) => {
-    const { userId, orderId } = req.body
+    const {userId, orderId} = req.body
 
     Refunds.findOne({
         where: {
@@ -111,7 +111,7 @@ export const viewRefundDetails = (req, res) => {
 }
 
 export const filterRefunds = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     const filters = req.query
 
@@ -169,7 +169,7 @@ export const filterRefunds = (req, res) => {
 }
 
 export const filterRefundsOnCustomer = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     const filters = req.query
 
@@ -242,7 +242,7 @@ export const filterRefundsOnCustomer = (req, res) => {
 }
 
 export const fetchCustomerRefunds = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     Refunds.findAll({
         where: {
@@ -259,7 +259,7 @@ export const fetchCustomerRefunds = (req, res) => {
 }
 
 export const viewCustomerRefund = (req, res) => {
-    const { userId, refundId } = req.body
+    const {userId, refundId} = req.body
 
     Refunds.findOne({
         where: {
@@ -277,7 +277,7 @@ export const viewCustomerRefund = (req, res) => {
 }
 
 export const searchCustomerRefund = (req, res) => {
-    const { userId, refundId } = req.body
+    const {userId, refundId} = req.body
 
     const x = {}
     x.refundId = {

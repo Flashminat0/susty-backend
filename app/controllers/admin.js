@@ -1,11 +1,11 @@
-import { Op } from 'sequelize'
+import {Op} from 'sequelize'
 import moment from 'moment'
 
 const db = require('../config/db.config')
-const { User, Site, Product, Refunds, Orders } = db
+const {User, Site, Product, Refunds, Orders} = db
 
 export const setSellerNotice = (req, res) => {
-    const { sellerNotice } = req.body
+    const {sellerNotice} = req.body
 
     Site.update(
         {
@@ -41,7 +41,7 @@ export const setSellerNotice = (req, res) => {
 }
 
 export const setCustomerNotice = (req, res) => {
-    const { customerNotice } = req.body
+    const {customerNotice} = req.body
 
     Site.update(
         {

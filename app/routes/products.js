@@ -10,7 +10,7 @@ import {
     updateProduct,
     filterProductsToUser,
 } from '../controllers/products'
-import { validateToken } from '../middlewares/user'
+import {validateToken} from '../middlewares/user'
 
 const router = express.Router()
 

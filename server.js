@@ -1,5 +1,5 @@
 import express from 'express'
-import { readdirSync } from 'fs'
+import {readdirSync} from 'fs'
 
 // Create the express app
 const app = express()
@@ -12,7 +12,7 @@ db.sequelize.sync().then(() => {
 })
 
 //applying middleware
-app.use(express.json({ limit: '5mb' }))
+app.use(express.json({limit: '5mb'}))
 
 const corsOptions = {
     origin: '*',

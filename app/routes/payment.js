@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { validateToken } from '../middlewares/user'
+import {validateToken} from '../middlewares/user'
 import {
     paypalBuy,
     paypalBuyFail,

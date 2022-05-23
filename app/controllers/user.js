@@ -2,8 +2,8 @@ import db from '../config/db.config'
 import moment from 'moment'
 import jwt from 'jsonwebtoken'
 
-const { customAlphabet } = require('nanoid')
-const { User, Orders, Product, OtpNumber, Wallet, Refunds, Seller, Site } = db
+const {customAlphabet} = require('nanoid')
+const {User, Orders, Product, OtpNumber, Wallet, Refunds, Seller, Site} = db
 
 require('dotenv').config()
 
@@ -51,15 +51,15 @@ export const register = (req, res) => {
         !lastName ||
         !rePassword
     ) {
-        return res.status(400).json({ msg: `Please enter all fields` })
+        return res.status(400).json({msg: `Please enter all fields`})
     } else if (password.length < 6 || rePassword.length < 6) {
         return res
             .status(400)
-            .json({ msg: 'Password must be at least 6 characters' })
+            .json({msg: 'Password must be at least 6 characters'})
     } else if (!passwordStrength(password)) {
-        return res.status(400).json({ msg: 'Passwords is not strong enough' })
+        return res.status(400).json({msg: 'Passwords is not strong enough'})
     } else if (password !== rePassword) {
-        return res.status(400).json({ msg: 'Passwords do not match' })
+        return res.status(400).json({msg: 'Passwords do not match'})
     } else {
         User.findOne({
             where: {
@@ -67,7 +67,7 @@ export const register = (req, res) => {
             },
         }).then((existingUser) => {
             if (existingUser) {
-                return res.status(400).json({ msg: 'Username already exists' })
+                return res.status(400).json({msg: 'Username already exists'})
             }
 
             User.findOne({
@@ -76,7 +76,7 @@ export const register = (req, res) => {
                 },
             }).then((existingEmail) => {
                 if (existingEmail) {
-                    return res.status(400).json({ msg: 'Email already used.' })
+                    return res.status(400).json({msg: 'Email already used.'})
                 }
 
                 OtpNumber.findOne({
@@ -86,7 +86,7 @@ export const register = (req, res) => {
                     },
                 }).then((otp) => {
                     if (!otp) {
-                        return res.status(400).json({ msg: 'OTP is not valid' })
+                        return res.status(400).json({msg: 'OTP is not valid'})
                     }
 
                     OtpNumber.destroy({
@@ -141,14 +141,14 @@ const passwordStrength = (plainTextPassword) => {
 let refreshTokens = []
 
 export const login = (req, res) => {
-    const { username, password } = req.body
+    const {username, password} = req.body
 
     if (!username || !password) {
-        return res.status(400).json({ msg: 'Please enter all fields' })
+        return res.status(400).json({msg: 'Please enter all fields'})
     } else if (password.length < 6) {
         return res
             .status(400)
-            .json({ msg: 'Password must be at least 6 characters' })
+            .json({msg: 'Password must be at least 6 characters'})
     } else {
         User.findOne({
             where: {
@@ -160,7 +160,7 @@ export const login = (req, res) => {
                 if (!user) {
                     return res
                         .status(400)
-                        .json({ msg: 'Username or password is incorrect' })
+                        .json({msg: 'Username or password is incorrect'})
                 } else {
                     const authToken = jwt.sign(
                         {
@@ -175,7 +175,7 @@ export const login = (req, res) => {
                             role: user.role,
                         },
                         process.env.REFRESH_TOKEN_SECRET,
-                        { expiresIn: '1h' }
+                        {expiresIn: '1h'}
                     )
 
                     //TODO
@@ -203,15 +203,13 @@ export const login = (req, res) => {
                 }
             })
             .catch((err) => {
-                return res
-                    .status(400)
-                    .json({ msg: 'Something went wrong', err })
+                return res.status(400).json({msg: 'Something went wrong', err})
             })
     }
 }
 
 export const generateNewToken = (req, res) => {
-    const { refreshToken, userDetails } = req.body
+    const {refreshToken, userDetails} = req.body
 
     if (refreshToken == null) {
         return res.sendStatus(401)
@@ -226,19 +224,19 @@ export const generateNewToken = (req, res) => {
         const authToken = jwt.sign(user, process.env.AUTH_TOKEN_SECRET, {
             expiresIn: '7d',
         })
-        res.json({ authToken })
+        res.json({authToken})
     })
 }
 
 export const getOtp = (req, res) => {
-    const { userId, phoneNumber } = req.body
+    const {userId, phoneNumber} = req.body
 
     if (!phoneNumber) {
-        return res.status(400).json({ msg: 'Please enter all fields' })
+        return res.status(400).json({msg: 'Please enter all fields'})
     } else if (phoneNumber.length < 10) {
         return res
             .status(400)
-            .json({ msg: 'Phone number must be at least 10 characters' })
+            .json({msg: 'Phone number must be at least 10 characters'})
     } else {
         let otp_Password = Math.floor(1000 + Math.random() * 9000)
 
@@ -264,24 +262,24 @@ export const getOtp = (req, res) => {
                     .catch((err) => {
                         return res
                             .status(400)
-                            .json({ message: 'Something went wrong', err })
+                            .json({message: 'Something went wrong', err})
                     })
             })
             .catch((err) => {
-                return res.status(400).json({ message: 'No user', err })
+                return res.status(400).json({message: 'No user', err})
             })
     }
 }
 
 export const otpForRegistration = (req, res) => {
-    const { phoneNumber } = req.body
+    const {phoneNumber} = req.body
 
     if (!phoneNumber) {
-        return res.status(400).json({ msg: 'Please enter all fields' })
+        return res.status(400).json({msg: 'Please enter all fields'})
     } else if (phoneNumber.length < 10) {
         return res
             .status(400)
-            .json({ msg: 'Phone number must be at least 10 characters' })
+            .json({msg: 'Phone number must be at least 10 characters'})
     } else {
         let otp_Password = Math.floor(1000 + Math.random() * 9000)
 
@@ -300,13 +298,13 @@ export const otpForRegistration = (req, res) => {
             .catch((err) => {
                 return res
                     .status(400)
-                    .json({ message: 'Something went wrong', err })
+                    .json({message: 'Something went wrong', err})
             })
     }
 }
 
 export const isUserAvailable = (req, res) => {
-    const { userName } = req.body
+    const {userName} = req.body
 
     User.findOne({
         where: {
@@ -327,12 +325,12 @@ export const isUserAvailable = (req, res) => {
             }
         })
         .catch((err) => {
-            return res.status(400).json({ msg: err.message })
+            return res.status(400).json({msg: err.message})
         })
 }
 
 export const fetchUser = (req, res) => {
-    const { userName } = req.body
+    const {userName} = req.body
 
     User.findOne({
         where: {
@@ -340,15 +338,15 @@ export const fetchUser = (req, res) => {
         },
     })
         .then((user) => {
-            return res.status(200).json({ user: user })
+            return res.status(200).json({user: user})
         })
         .catch((error) => {
-            return res.status(400).json({ msg: 'Not a valid user' })
+            return res.status(400).json({msg: 'Not a valid user'})
         })
 }
 
 export const changePassword = (req, res) => {
-    const { userId, password } = req.body
+    const {userId, password} = req.body
 
     if (passwordStrength(req.body.password) === false) {
         return res.status(400).json({
@@ -367,15 +365,15 @@ export const changePassword = (req, res) => {
         }
     )
         .then((user) => {
-            return res.status(200).json({ user: user })
+            return res.status(200).json({user: user})
         })
         .catch((error) => {
-            return res.status(400).json({ msg: 'Not a valid user' })
+            return res.status(400).json({msg: 'Not a valid user'})
         })
 }
 
 export const changeMobileNumber = (req, res) => {
-    const { userId, phoneNumber } = req.body
+    const {userId, phoneNumber} = req.body
 
     User.update(
         {
@@ -388,15 +386,15 @@ export const changeMobileNumber = (req, res) => {
         }
     )
         .then((user) => {
-            return res.status(200).json({ user: user })
+            return res.status(200).json({user: user})
         })
         .catch((error) => {
-            return res.status(400).json({ msg: 'Not a valid user' })
+            return res.status(400).json({msg: 'Not a valid user'})
         })
 }
 
 export const cancelOnPendingOrderByCustomer = (req, res) => {
-    const { userId, orderId } = req.body
+    const {userId, orderId} = req.body
 
     Orders.update(
         {
@@ -429,7 +427,7 @@ export const cancelOnPendingOrderByCustomer = (req, res) => {
 }
 
 export const cancelOnProcessOrderByCustomer = (req, res) => {
-    const { userId, orderId } = req.body
+    const {userId, orderId} = req.body
 
     Orders.update(
         {
@@ -462,7 +460,7 @@ export const cancelOnProcessOrderByCustomer = (req, res) => {
 }
 
 export const fetchUserDetails = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     User.findOne({
         where: {
@@ -484,12 +482,12 @@ export const fetchUserDetails = (req, res) => {
             })
         })
         .catch((error) => {
-            return res.status(400).json({ msg: 'Not a valid user' })
+            return res.status(400).json({msg: 'Not a valid user'})
         })
 }
 
 export const changeUserFullName = (req, res) => {
-    const { userId, firstName, lastName } = req.body
+    const {userId, firstName, lastName} = req.body
 
     User.update(
         {
@@ -504,15 +502,15 @@ export const changeUserFullName = (req, res) => {
         }
     )
         .then((user) => {
-            return res.status(200).json({ user: user[1][0] })
+            return res.status(200).json({user: user[1][0]})
         })
         .catch((error) => {
-            return res.status(400).json({ msg: 'Not a valid user' })
+            return res.status(400).json({msg: 'Not a valid user'})
         })
 }
 
 export const changeUserEmail = (req, res) => {
-    const { userId, email, phoneNumber, otp } = req.body
+    const {userId, email, phoneNumber, otp} = req.body
 
     OtpNumber.findOne({
         where: {
@@ -542,23 +540,23 @@ export const changeUserEmail = (req, res) => {
                         }
                     )
                         .then((user) => {
-                            return res.status(200).json({ user: user[1][0] })
+                            return res.status(200).json({user: user[1][0]})
                         })
                         .catch((error) => {
                             return res
                                 .status(400)
-                                .json({ msg: 'Not a valid user' })
+                                .json({msg: 'Not a valid user'})
                         })
                 })
             }
         })
         .catch((error) => {
-            return res.status(400).json({ msg: 'OTP is not valid' })
+            return res.status(400).json({msg: 'OTP is not valid'})
         })
 }
 
 export const becomeSeller = (req, res) => {
-    const { userId, storeName, storeUserName } = req.body
+    const {userId, storeName, storeUserName} = req.body
 
     //TODO image should be uploaded here too
 
@@ -569,7 +567,7 @@ export const becomeSeller = (req, res) => {
     })
         .then((seller) => {
             if (seller) {
-                return res.status(200).json({ isAvailable: false })
+                return res.status(200).json({isAvailable: false})
             } else {
                 Seller.create({
                     storeName: storeName,
@@ -589,30 +587,26 @@ export const becomeSeller = (req, res) => {
                             }
                         )
                             .then((user) => {
-                                return res
-                                    .status(200)
-                                    .json({ isAvailable: true })
+                                return res.status(200).json({isAvailable: true})
                             })
                             .catch((error) => {
                                 return res
                                     .status(400)
-                                    .json({ msg: 'Not a valid user' })
+                                    .json({msg: 'Not a valid user'})
                             })
                     })
                     .catch((error) => {
-                        return res.status(400).json({ msg: 'Not a valid user' })
+                        return res.status(400).json({msg: 'Not a valid user'})
                     })
             }
         })
         .catch((error) => {
-            return res
-                .status(400)
-                .json({ msg: 'Not a valid user', error: error })
+            return res.status(400).json({msg: 'Not a valid user', error: error})
         })
 }
 
 export const isSellerUserNameAvailable = (req, res) => {
-    const { storeUserName } = req.body
+    const {storeUserName} = req.body
 
     Seller.findOne({
         where: {
@@ -621,13 +615,13 @@ export const isSellerUserNameAvailable = (req, res) => {
     })
         .then((seller) => {
             if (seller) {
-                return res.status(200).json({ isAvailable: false })
+                return res.status(200).json({isAvailable: false})
             } else {
-                return res.status(200).json({ isAvailable: true })
+                return res.status(200).json({isAvailable: true})
             }
         })
         .catch((error) => {
-            return res.status(400).json({ msg: 'Not a valid user' })
+            return res.status(400).json({msg: 'Not a valid user'})
         })
 }
 export const getUserNotice = (req, res) => {

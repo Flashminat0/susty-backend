@@ -2,7 +2,7 @@ import express from 'express'
 
 const router = express.Router()
 
-import { getAllProducts, getProductById } from '../controllers/products'
+import {getAllProducts, getProductById} from '../controllers/products'
 
 // dashboard
 router.get('/guest/get-all-products', getAllProducts)

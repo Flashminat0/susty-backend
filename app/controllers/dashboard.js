@@ -1,8 +1,8 @@
 const db = require('../config/db.config')
-const { Orders, Product, OtpNumber, Refunds, User, Wallet } = db
+const {Orders, Product, OtpNumber, Refunds, User, Wallet} = db
 
 export const getOrderSummery = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     let orderSummery = {
         onProcess: 0,
@@ -29,7 +29,7 @@ export const getOrderSummery = (req, res) => {
 }
 
 export const getProductSummery = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     let productSummery = {
         published: 0,
@@ -53,7 +53,7 @@ export const getProductSummery = (req, res) => {
 }
 
 export const getCustomerInsight = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     //TODO ask about this
     let customerInsight = {
@@ -82,7 +82,7 @@ export const getCustomerInsight = (req, res) => {
 }
 
 export const getRefundStatus = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     let refundSummery = {
         pending: 0,
@@ -109,7 +109,7 @@ export const getRefundStatus = (req, res) => {
 }
 
 export const getWalletDetails = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     let walletSummery = {
         totalEarnings: 0,

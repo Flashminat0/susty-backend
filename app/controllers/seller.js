@@ -1,11 +1,11 @@
 import db from '../config/db.config'
-import { Op } from 'sequelize'
+import {Op} from 'sequelize'
 import moment from 'moment'
 
-const { Seller, Product, Site } = db
+const {Seller, Product, Site} = db
 
 export const changeDescription = (req, res) => {
-    const { sellerId, Description } = req.body
+    const {sellerId, Description} = req.body
 
     Seller.update(
         {
@@ -33,7 +33,7 @@ export const changeDescription = (req, res) => {
 }
 
 export const removeStore = (req, res) => {
-    const { sellerId } = req.body
+    const {sellerId} = req.body
 
     Seller.destroy({
         where: {
@@ -56,7 +56,7 @@ export const removeStore = (req, res) => {
 }
 
 export const changeLocation = (req, res) => {
-    const { userId, location } = req.body
+    const {userId, location} = req.body
 
     Seller.update(
         {
@@ -84,7 +84,7 @@ export const changeLocation = (req, res) => {
 }
 
 export const filterProducts = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
     const filters = req.query
 
     for (const queryKey in filters) {
@@ -158,7 +158,7 @@ export const getSellerNotice = (req, res) => {
 }
 
 export const getStoreInfo = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     Seller.findOne({
         where: {
@@ -182,7 +182,7 @@ export const getStoreInfo = (req, res) => {
 }
 
 export const changeStoreDescription = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     Seller.update(
         {
@@ -225,7 +225,7 @@ export const changeStoreDescription = (req, res) => {
 }
 
 export const getBankInfo = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     Seller.findOne({
         where: {
@@ -249,7 +249,7 @@ export const getBankInfo = (req, res) => {
 }
 
 export const changeBankInfo = (req, res) => {
-    const { userId } = req.body
+    const {userId} = req.body
 
     Seller.update(
         {
