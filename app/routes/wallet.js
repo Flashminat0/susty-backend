@@ -1,9 +1,7 @@
-import express from "express";
+import express from 'express'
 
+const router = express.Router()
 
-const router = express.Router();
+router.get('/wallet/get-details')
 
-router.get('/wallet/get-details', )
-
-
-module.exports = router;
+module.exports = router

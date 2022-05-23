@@ -1,4 +1,4 @@
-const db = require('../config/db.config') ;
+const db = require('../config/db.config')
 
 // export const getAllProducts2 = (req, res) => {
 //     const {page, itemsPerPage} = req.body
@@ -15,4 +15,3 @@ const db = require('../config/db.config') ;
 //             return res.status(400).json({msg: err.message});
 //         });
 // }
-
