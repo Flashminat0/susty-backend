@@ -111,19 +111,15 @@ export const register = (req, res) => {
                                 lastName: lastName,
                             })
                                 .then((user) => {
-                                    return res
-                                        .status(200)
-                                        .json({
-                                            msg: 'User created successfully',
-                                        })
+                                    return res.status(200).json({
+                                        msg: 'User created successfully',
+                                    })
                                 })
                                 .catch((err) => {
-                                    return res
-                                        .status(400)
-                                        .json({
-                                            msg: 'Something went wrong',
-                                            err,
-                                        })
+                                    return res.status(400).json({
+                                        msg: 'Something went wrong',
+                                        err,
+                                    })
                                 })
                         })
                 })
@@ -319,19 +315,15 @@ export const isUserAvailable = (req, res) => {
     })
         .then((user) => {
             if (!user) {
-                return res
-                    .status(200)
-                    .json({
-                        isAvailable: true,
-                        msg: 'UserName is available to use',
-                    })
+                return res.status(200).json({
+                    isAvailable: true,
+                    msg: 'UserName is available to use',
+                })
             } else {
-                return res
-                    .status(200)
-                    .json({
-                        isAvailable: false,
-                        msg: 'UserName is not available to use',
-                    })
+                return res.status(200).json({
+                    isAvailable: false,
+                    msg: 'UserName is not available to use',
+                })
             }
         })
         .catch((err) => {
@@ -359,11 +351,9 @@ export const changePassword = (req, res) => {
     const { userId, password } = req.body
 
     if (passwordStrength(req.body.password) === false) {
-        return res
-            .status(400)
-            .json({
-                msg: 'Password must be at least 8 characters long and contain at least one number, one uppercase and one lowercase letter',
-            })
+        return res.status(400).json({
+            msg: 'Password must be at least 8 characters long and contain at least one number, one uppercase and one lowercase letter',
+        })
     }
 
     User.update(
